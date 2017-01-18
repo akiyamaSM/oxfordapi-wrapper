@@ -2,14 +2,14 @@
 
 namespace Inani\OxfordApiWrapper;
 
-use Inani\OxfordApiWrapper\Components\Result;
-use Inani\OxfordApiWrapper\Components\Translator;
+use Inani\OxfordApiWrapper\Components\TranslatorParser;
+use Inani\OxfordApiWrapper\Components\TranslatorTrait;
 use GuzzleHttp\Client;
 use Exception;
 
 class OxfordWrapper
 {
-    use Translator;
+    use TranslatorTrait;
 
     protected $client;
 
@@ -46,7 +46,7 @@ class OxfordWrapper
     {
         if($this->result->getStatusCode() == 200){
             return (
-                new Result(
+                new TranslatorParser(
                     json_decode(
                         $this->result->getBody()->getContents()
                     )->results
