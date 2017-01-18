@@ -2,19 +2,18 @@
 
 namespace Inani\OxfordApiWrapper;
 
+use Inani\OxfordApiWrapper\Components\Result;
+use Inani\OxfordApiWrapper\Components\Translator;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
 use Exception;
 
 class OxfordWrapper
 {
+    use Translator;
+
     protected $client;
 
     protected $word;
-
-    protected $from;
-
-    protected $to;
 
     protected $base = 'api/v1';
 
@@ -38,49 +37,6 @@ class OxfordWrapper
     }
 
     /**
-     * Source language
-     *
-     * @param $from
-     * @return $this
-     */
-    public function from($from)
-    {
-        $this->from = $from;
-        return $this;
-    }
-
-    /**
-     * Target language
-     *
-     * @param $to
-     * @return $this
-     */
-    public function to($to)
-    {
-        $this->to = $to;
-        return $this;
-    }
-
-    /**
-     * Translate
-     *
-     * @return $this
-     * @throws Exception
-     */
-    public function translate()
-    {
-        try{
-            $this->result = $this->client->get(
-                "{$this->base}/entries/{$this->from}/{$this->word}/translations={$this->to}"
-            );
-        }catch (Exception $e){
-            throw new Exception('parameters not found!');
-        }
-        $this->reset();
-        return $this;
-    }
-
-    /**
      * Get the results
      *
      * @return mixed
@@ -88,9 +44,16 @@ class OxfordWrapper
      */
     public function get()
     {
-        if($this->result->getStatusCode() == 200)
-            return $this->result;
-        throw new Exception('Error occured');
+        if($this->result->getStatusCode() == 200){
+            return (
+                new Result(
+                    json_decode(
+                        $this->result->getBody()->getContents()
+                    )->results
+                )
+            );
+        }
+        throw new Exception('An error occurred');
     }
 
     /**
@@ -98,8 +61,7 @@ class OxfordWrapper
      */
     protected function reset()
     {
-        $this->from = null;
-        $this->to = null;
+        $this->reset_translator();
         $this->word = null;
     }
 }
