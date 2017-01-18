@@ -23,4 +23,11 @@ $oxford->lookFor('balablabla')
                ->translate();
 // grab result object
 $result = $oxford->get();
+
+// get array of translations
+$translations = $result->getTranslations();
+
+// get array of [example => [translations]]
+$examples = $result->getExamples();
+
 ```
