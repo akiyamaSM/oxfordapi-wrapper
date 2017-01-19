@@ -3,12 +3,15 @@
 namespace Inani\OxfordApiWrapper;
 
 use Inani\OxfordApiWrapper\Components\DefinerTrait;
+use Inani\OxfordApiWrapper\Components\DictionaryTrait;
 use Inani\OxfordApiWrapper\Components\TranslatorTrait;
 use GuzzleHttp\Client;
 
 class OxfordWrapper
 {
-    use TranslatorTrait, DefinerTrait;
+    use TranslatorTrait,
+        DefinerTrait,
+        DictionaryTrait;
 
     protected $client;
 
