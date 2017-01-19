@@ -15,19 +15,28 @@ make a new instance
 $oxford = app(Inani\OxfordApiWrapper\OxfordWrapper::class);
 ```
 
+### Translation
 ```php
-// look for the translation from a language to an other
-$oxford->lookFor('balablabla')
-               ->from('en')
-               ->to('es')
-               ->translate();
-// grab result object
-$result = $oxford->get();
-
+// look for the translation from a language to an other, returns a parser
+$parser =$oxford->lookFor('balablabla')
+                ->from('en')
+                ->to('es')
+                ->translate();
+                
 // get array of translations
-$translations = $result->getTranslations();
+$translations = $parser->get();
 
 // get array of [example => [translations]]
-$examples = $result->getExamples();
+$examples = $parser->getExamples();
+
+```
+### Definitiones
+```php
+// look for the definitions of a word, returns a parser
+$parser =$oxford->lookFor('balablabla')
+                ->define();
+                
+// get array of definitions
+$definitions = $parser->get();
 
 ```
