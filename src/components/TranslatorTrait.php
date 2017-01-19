@@ -44,6 +44,7 @@ trait TranslatorTrait
     {
         $this->from = null;
         $this->to = null;
+        $this->reset();
     }
 
     /**
@@ -58,10 +59,22 @@ trait TranslatorTrait
             $this->result = $this->client->get(
                 "{$this->base}/entries/{$this->from}/{$this->word}/translations={$this->to}"
             );
+
+            if($this->result->getStatusCode() == 200){
+                $this->reset_translator();
+                return (
+                    new TranslatorParser(
+                        json_decode(
+                            $this->result->getBody()->getContents()
+                        )->results
+                    )
+                );
+            }
+            throw new Exception('An error occurred');
         }catch (Exception $e){
             throw new TranslateException($e->getCode());
         }
-        $this->reset();
+        $this->reset_translator();
         return $this;
     }
 }

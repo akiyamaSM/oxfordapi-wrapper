@@ -2,14 +2,13 @@
 
 namespace Inani\OxfordApiWrapper;
 
-use Inani\OxfordApiWrapper\Components\TranslatorParser;
+use Inani\OxfordApiWrapper\Components\DefinerTrait;
 use Inani\OxfordApiWrapper\Components\TranslatorTrait;
 use GuzzleHttp\Client;
-use Exception;
 
 class OxfordWrapper
 {
-    use TranslatorTrait;
+    use TranslatorTrait, DefinerTrait;
 
     protected $client;
 
@@ -37,31 +36,10 @@ class OxfordWrapper
     }
 
     /**
-     * Get the results
-     *
-     * @return mixed
-     * @throws Exception
-     */
-    public function get()
-    {
-        if($this->result->getStatusCode() == 200){
-            return (
-                new TranslatorParser(
-                    json_decode(
-                        $this->result->getBody()->getContents()
-                    )->results
-                )
-            );
-        }
-        throw new Exception('An error occurred');
-    }
-
-    /**
      * Reset the parameters
      */
     protected function reset()
     {
-        $this->reset_translator();
         $this->word = null;
     }
 }

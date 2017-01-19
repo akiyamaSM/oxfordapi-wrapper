@@ -12,6 +12,11 @@ class TranslateException extends Exception
         500 => 'Internal Error. An error occurred while processing the data.'
     ];
 
+    /**
+     * Constructor
+     *
+     * @param string $code
+     */
     public function __construct($code)
     {
         parent::__construct($this->messages[$code]);

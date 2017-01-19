@@ -17,7 +17,6 @@ class DefinerParser extends BasicResult
         if(! $this->isEmptyDefinitions()){
             return $this->definitions;
         }
-
         $senses = $this->result[0]
                         ->lexicalEntries[0]
                         ->entries[0]
@@ -32,7 +31,7 @@ class DefinerParser extends BasicResult
             }
 
         }
-        return $this->definitions;
+        return ($this->definitions = $definitions);
     }
 
     /**
