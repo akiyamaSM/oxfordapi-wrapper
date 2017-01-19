@@ -1,8 +1,20 @@
 # oxfordapi-wrapper
 A PHP/Laravel Wrapper for oxford dictionary API
-## How to use
+## Installation
 
-First set up in the env file
+First, install the package through Composer.
+```php
+composer require inani/oxfordapi-wrapper
+```
+Then include the service provider inside config/app.php.
+```php
+'providers' => [
+    ...
+    Inani\OxfordApiWrapper\OxfordWrapperServiceProvider::class,
+    ...
+];
+```
+At least set up in the env file
 
 ```php
 OXFORD_API_BASE_URI = 
