@@ -12,6 +12,7 @@ OXFORD_APP_KEY =
 make a new instance
 
 ```php
+// Make it or pass it as argument
 $oxford = app(Inani\OxfordApiWrapper\OxfordWrapper::class);
 ```
 
@@ -30,7 +31,7 @@ $translations = $parser->get();
 $examples = $parser->getExamples();
 
 ```
-### Definitiones
+### Definitions
 ```php
 // look for the definitions of a word, returns a parser
 $parser =$oxford->lookFor('balablabla')
@@ -40,3 +41,11 @@ $parser =$oxford->lookFor('balablabla')
 $definitions = $parser->get();
 
 ```
+### Examples
+```php
+// look for the examples of a word, returns a parser
+$parser =$oxford->lookFor('balablabla')
+                ->examples();
+                
+// get array of examples
+$definitions = $parser->get();
