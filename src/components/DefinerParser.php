@@ -43,4 +43,9 @@ class DefinerParser extends BasicResult
     {
         return count($this->definitions) == 0;
     }
+
+    public function getResult()
+    {
+        return $this->result;
+    }
 }
