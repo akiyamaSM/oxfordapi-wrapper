@@ -49,3 +49,20 @@ $parser =$oxford->lookFor('balablabla')
                 
 // get array of examples
 $definitions = $parser->get();
+```
+### Thesaurus
+```php
+// You can try all combinations
+$res = $oxford->lookFor('happy')
+               ->synonym()
+               ->antonym()
+               ->fetch();
+                
+// results will be related to (syno or anto)
+// get synonyms and/or antonyms 
+$res->get();
+// get only antonyms or null if not specfied in fetch
+$res->antonyms();
+//get only synonyms or null if not specfied in fetch
+$res->synonyms();
+```
