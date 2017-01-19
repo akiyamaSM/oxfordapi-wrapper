@@ -27,6 +27,7 @@ make a new instance
 // Make it or pass it as argument
 $oxford = app(Inani\OxfordApiWrapper\OxfordWrapper::class);
 ```
+## How to use
 
 ### Translation
 ```php
