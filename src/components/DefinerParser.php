@@ -17,19 +17,21 @@ class DefinerParser extends BasicResult
         if(! $this->isEmptyDefinitions()){
             return $this->definitions;
         }
-        $senses = $this->result[0]
-                        ->lexicalEntries[0]
-                        ->entries[0]
-                        ->senses; // still need to work on
+        $lexicales = $this->result[0]->lexicalEntries;
         $definitions = [];
-        // loop over all of the senses
-        foreach($senses as $sens){
-            if(property_exists($sens, 'definitions')){
-                foreach($sens->definitions as $definition){
-                    $definitions[] = str_replace(':','',$definition);
+
+        foreach($lexicales as $lexical){
+            if(property_exists($lexical, 'entries')){
+                foreach($lexical->entries as $entry){
+                    if(property_exists($entry, 'senses')){
+                        foreach($entry->senses as $sens){
+                            foreach($sens->definitions as $definition){
+                                $definitions[] = str_replace(':','',$definition);
+                            }
+                        }
+                    }
                 }
             }
-
         }
         return ($this->definitions = $definitions);
     }
