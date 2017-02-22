@@ -4,6 +4,7 @@ namespace Inani\OxfordApiWrapper;
 
 use Inani\OxfordApiWrapper\Components\DefinerTrait;
 use Inani\OxfordApiWrapper\Components\DictionaryTrait;
+use Inani\OxfordApiWrapper\Components\TalkerTrait;
 use Inani\OxfordApiWrapper\Components\TranslatorTrait;
 use GuzzleHttp\Client;
 
@@ -11,7 +12,8 @@ class OxfordWrapper
 {
     use TranslatorTrait,
         DefinerTrait,
-        DictionaryTrait;
+        DictionaryTrait,
+        TalkerTrait;
 
     protected $client;
 
