@@ -79,3 +79,18 @@ $res->antonyms();
 //get only synonyms or null if not specfied in fetch
 $res->synonyms();
 ```
+### Phonetics
+```php
+
+$res = $oxford->lookFor('ace')
+               ->talk();
+                
+// get the array of result
+$res->get();
+// get the link to the audio file of pronunciation
+$res->speak();
+//get the spelling
+$res->spell();
+//get the notation
+$res->notation();
+```
